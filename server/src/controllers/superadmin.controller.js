@@ -1,9 +1,7 @@
 import SuAdmin from '../models/superadmin.model.js'
-import crypto from 'node:crypto';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import createAccessToken from '../libs/jwt.js';
-import { SALT_ROUNDS, expiration, SECRET_JWT_KEY } from '../config.js';
+import { SALT_ROUNDS } from '../config.js';
 
 class SuAdminController {
     async register(req, res) {

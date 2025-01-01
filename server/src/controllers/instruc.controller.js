@@ -1,8 +1,7 @@
 import Instruc from '../models/instructor.model.js'
-import crypto from 'node:crypto';
 import bcrypt from 'bcryptjs';
 import createAccessToken from '../libs/jwt.js';
-import { SALT_ROUNDS, expiration, SECRET_JWT_KEY } from '../config.js';
+import { SALT_ROUNDS } from '../config.js';
 
 class InstructorController {
     async register(req, res) {

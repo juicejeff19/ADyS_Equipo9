@@ -1,0 +1,11 @@
+# Ignorar node_modules en client y server
+client/node_modules/
+server/node_modules/
+
+# Ignorar cualquier node_modules en cualquier subcarpeta 
+**/node_modules/
+
+.env
+.DS_Store
+dist/
+build/

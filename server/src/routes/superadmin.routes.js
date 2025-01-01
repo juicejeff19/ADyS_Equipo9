@@ -8,7 +8,7 @@ const router = Router();
 router.post("/login", login)
 router.post("/logout", authRequired,logout);
 router.get("/profile",  authRequired, profile);
-router.put("/editar",  authRequired, editar);//faltta implementar
+router.put("/editar",  authRequired, editar);//faltta COMPLETAR
 router.get("/", ()=> {
     console.log("bienvenido")
 })

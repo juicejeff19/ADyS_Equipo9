@@ -2,32 +2,61 @@ import mongoose from "mongoose";
 
 const eventoSchema = new mongoose.Schema({
     name: {
-        type: String, required: true
+        type: String,
+        required: true
     },
-    description: { type: String },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
-    registrationStart: { type: Date, required: true },
-    registrationStart: { type: Date, required: true },
-    modalities: [{ type: String }], // Ej: Exterior, Cinta, Categorías
-    cost: { type: Number, required: true },
-    requirements: { type: String },
-    rules: { type: String },
-    schedule: [
-        {
-            date: { type: Date },
-            startTime: { type: String },
-            endTime: { type: String }
-        }
-    ],
-    sessions: [
-        {
-            sessionId: { type: String },
-            description: { type: String },
-            outOfCalendar: { type: Boolean, default: false },
-            reason: { type: String } // Solo si está fuera de calendario
-        }
-    ]
+    startDate: {
+        type: Date, 
+        required: true,
+    },
+    endDate: {
+        type: Date,
+        required: true,
+    },
+    closingOfRegistratiosn: {
+        type: Date,
+        required: true, 
+    },
+    mode: {
+        type: [String],
+        enum: ["relay", "individual"],
+        required: true
+    },
+    cost: {
+        type: Number,
+        required: true,
+    },
+    // typeEvent: {
+    //     type: String,
+    //     //ref: 'TipoEvento',  
+    //     required: true  
+    // },
+    requirements: {
+        type: String,
+        require: true,
+    },
+    rules: {
+        type: String,
+        require: true,
+    },
+    callPublished: {
+        type: Boolean,
+        default: false,
+    },
+    
+    kilometers: {
+        type: Number,
+        required: true,
+    },
+    sessions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Sesion"
+    }],
+    description: { 
+        type: String, 
+        //ref: 'TipoEvento',
+        required: false },
+
 }, {
     timestamps: true
 });

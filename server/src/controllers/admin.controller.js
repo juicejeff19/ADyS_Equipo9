@@ -1,8 +1,11 @@
 import Admin from '../models/admin.model.js'
+import Evento from '../models/evento.model.js'
+import TipoEvent from '../models/tipoEvento.model.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import createAccessToken from '../libs/jwt.js';
 import { SALT_ROUNDS, expiration, SECRET_JWT_KEY } from '../config.js';
+
 
 class AdminController {
     async register(req, res) {
@@ -94,8 +97,96 @@ class AdminController {
         })
     }
 
-    registrarEvento(req, res) {
-        res.status(200).json({message: "Falta la logica aqui de registrar un evento de un admin, lo mas recomendable seria un tipo formulario"})
+    async registrarEvento(req, res) {
+        const { 
+            name, 
+            startDate, 
+            endDate,  
+            closingOfRegistratiosn, 
+            mode, 
+            cost, 
+            typeEvent, 
+            requirements, 
+            rules, 
+            callPublished, 
+            kilometers,  
+            sessions,
+            description
+        } = req.body;
+        try {
+            const eventFound = await TipoEvent.findOne({name});
+
+            if(!eventFound) {
+                const newTypeEvent = new TipoEvent({
+                    name,
+                    description
+                })
+                
+                const newTypeEventSaved = await newTypeEvent.save();
+
+                const newEvent = new Evento({
+                    name,
+                    startDate,
+                    endDate,
+                    closingOfRegistratiosn, mode, cost, 
+                    typeEvent: newTypeEventSaved.name,
+                    requirements, rules, callPublished, kilometers, 
+                    sessions,
+                    description: newTypeEventSaved.description
+                });
+
+                const newEventSaved = await newEvent.save();
+
+                return res.json({
+                    name: newEventSaved.name,
+                    startDate: newEventSaved.startDate,
+                    endDate: newEventSaved.endDate,
+                    closingOfRegistratiosn: newEventSaved.closingOfRegistratiosn,
+                    sessions: newEventSaved.sessions,
+                    description: newEventSaved.description
+                })
+            } else {
+                const newEvent = new Evento({
+                    name,
+                    startDate,
+                    endDate,
+                    closingOfRegistratiosn, mode, cost, 
+                    typeEvent,
+                    requirements, rules, callPublished, kilometers, 
+                    sessions,
+                    description
+                });
+
+                const newEventSaved = await newEvent.save();
+
+                return res.json({
+                    name: newEventSaved.name,
+                    startDate: newEventSaved.startDate,
+                    endDate: newEventSaved.endDate,
+                    closingOfRegistratiosn: newEventSaved.closingOfRegistratiosn,
+                    sessions: newEventSaved.sessions,
+                    description: newEventSaved.description
+                })
+            }
+            
+        } catch (error) {
+            res.status(500).json({ message: error.message })
+        }
+    }
+
+    async registarTipoEvento(req, res) {
+        const { name, description} = req.body;
+        try {
+            const newType = new TipoEvent({
+                name, 
+                description
+            })
+            await newType.save();
+            res.json({ message: "ok" });
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
@@ -105,3 +196,4 @@ export const login = controller.login.bind(controller);
 export const logout = controller.logout.bind(controller);
 export const profile = controller.profile.bind(controller);
 export const registarEvento = controller.registrarEvento.bind(controller);
+export const tipoEvento = controller.registarTipoEvento.bind(controller);

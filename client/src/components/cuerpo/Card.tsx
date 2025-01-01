@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({ cardTitle, children, src}) => {
             <div className="card-body">
                 <h5 className="card-title">{cardTitle}</h5>
                 <p className="card-text">{children}</p>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+                <a href="#" className="btn btn-primary">Ver información</a>
             </div>
         </div>
     );

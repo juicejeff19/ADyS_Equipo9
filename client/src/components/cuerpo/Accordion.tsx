@@ -1,5 +1,5 @@
 import Accordion from 'react-bootstrap/Accordion';
-import styles from './accordion.css'
+import './accordion.css'
 
 const Acordion: React.FC = () => {
     return (

@@ -10,34 +10,39 @@ const competidorSchema = new mongoose.Schema({
         required: true,
     },
     gender: {
-        type: String, 
-        sex: ['man', 'woman'],
+        type: String,
+        enum: ['hombre', 'mujer'],
         required: true,
     },
     category: {
-        type: String, 
-        required: true, //infantil, juvenil, adulto
-    }, 
-    events: {
-        eventId: {
-            type: String, 
-            require: true
+        type: String,
+        enum: ['infantil', 'juvenil', 'adulto'],
+        required: true,
+    },
+    events: [
+        {
+            eventId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Evento',
+                required: true,
+            },
+            year: {
+                type: Number,
+                required: true,
+            },
+            sessions: [
+                {
+                    sessionId: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'Sesion',
+                        required: true,
+                    },
+                },
+            ],
         },
-        year: {
-            type: Number, 
-            requird: true,
-        }, 
-        sessions:[
-            {
-                sessionId: {type: String},
-                distanceKm: {type: Number},
-                time: {type: String}
-            }
-        ] 
-        
-    }
+    ],
 }, {
-    timestamps: true
-})
+    timestamps: true,
+});
 
 export default mongoose.model('Competidor', competidorSchema);
