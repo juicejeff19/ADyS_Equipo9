@@ -1,4 +1,5 @@
 // src/pages/Home.js
+// @ts-ignore
 import React from 'react';
 
 const Home = () => {
