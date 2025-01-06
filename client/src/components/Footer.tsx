@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
                     {/* About Us */}
                     <div className="col-md-3">
                         <h5>About Us</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec faucibus odio.</p>
+                        <p>Somos un grupo de 4 estudiante de la Escuela Superior de Cómputo del IPN, de la carrera de Ingeniería en Sistemas Computacionales</p>
                     </div>
                     
                     {/* Quick Links */}
