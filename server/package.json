@@ -13,10 +13,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "express": "4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
-    "mysql2": "3.11.5"
+    "mysql2": "3.11.5",
+    "pdfkit": "^0.16.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

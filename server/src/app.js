@@ -5,9 +5,14 @@ import instrucRoutes from './routes/instruc.routes.js';
 import superAdminRoutes from './routes/superadmin.routes.js';
 import devRoutes from './routes/dev.routes.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app = express();
 
+app.use(cors({
+    origin: 'http://localhost:5173',  // Dominio de tu cliente (frontend)
+  credentials: true,  // Permite compartir cookies
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());

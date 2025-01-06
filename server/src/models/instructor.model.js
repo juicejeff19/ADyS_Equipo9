@@ -11,7 +11,6 @@ const instrucSchema = new mongoose.Schema({
     events: [
       {
         eventId: { type: String, required: true },
-        role: { type: String, enum: ['responsable', 'asistente'] }
       }
     ]
 }, {
