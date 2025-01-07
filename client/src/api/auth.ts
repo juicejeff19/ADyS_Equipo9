@@ -43,4 +43,17 @@ export const registerEventRequest = (eventData: {
   }) => {
     return axios.post(`${API}admin/profile/registrarEvento`, eventData, { withCredentials: true });
   }
+
+  export const registerResultsRequest = (eventData: {
+    name: string;
+    eventId: string;
+    sessionId: string;
+    category: string;
+    gender: string; 
+    distanceKm: number;
+    time: string;
+    age: number;
+  }) => {
+    return axios.post(`${API}instructor/profile/registerResults`, eventData, { withCredentials: true });
+  }
   

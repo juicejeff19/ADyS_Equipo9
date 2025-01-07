@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode, useContext, useEffect } from "react";
-import { loginAdminRequest, loginInstrucRequest, loginSuAdminRequest, logoutAdminRequest, logoutInstrucRequest, logoutSuAdminRequest, registerEventRequest } from '../api/auth';
+import { loginAdminRequest, loginInstrucRequest, loginSuAdminRequest, logoutAdminRequest, logoutInstrucRequest, logoutSuAdminRequest, registerEventRequest, registerResultsRequest } from '../api/auth';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,17 @@ interface User {
     email: string;
     password: string;
 }
+
+type FormInsValues = {
+        name: string;
+        eventId: string;
+        sessionId: string;
+        category: string;
+        gender: string;
+        distanceKm: number;
+        time: string;
+        age: number;
+    };
 
 type FormEventValues = {
     name: string;
@@ -35,6 +46,7 @@ interface AuthContextType {
     siginSuAdmin: (user: User) => Promise<void>;
     logoutSuAdmin: () => Promise<void>;
     registerEvent: (data: FormEventValues) => Promise<void>;
+    registerResults: (data: FormInsValues) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -216,13 +228,40 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
 
-
-    ///--------------------
-    ///aqui abajo vas a escribir para el instructor
+    ///Función para registrar resultados por parte del instructor
     // vas a importar las funcones de la api del frontend, vas a crear tu
     //propio auth.ts para el instructor (crea otro archivo de preferencia)
     //y sigue el de ejmplo el que ya esta en la carrtepa api
+    const registerResults = async (dataIns: FormInsValues): Promise<void> => {
+        const resultData = {
+            name: dataIns.name,
+            eventId: dataIns.eventId,
+            sessionId: dataIns.sessionId,
+            category: dataIns.category,  
+            gender: dataIns.gender, 
+            distanceKm: dataIns.distanceKm,
+            time: dataIns.time,
+            age: dataIns.age, 
+        };
 
+        try {
+            const res = await registerResultsRequest(resultData); // Usando tu función para registrar el resultados
+            //Respuesta 
+            console.log("Los resultrados se registraron correctamente:", res.data);
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                if (Array.isArray(error.response.data)) {
+                    setErrores(error.response.data); // Aquí puedes gestionar los errores del backend
+                } else {
+                    console.error("El backend devolvió un formato inesperado:", error.response.data);
+                    setErrores(["Ocurrió un error inesperado"]);
+                }
+            } else {
+                console.error("Error no relacionado con Axios:", error);
+                setErrores(["Error inesperado"]);
+            }
+        }
+    };
 
     useEffect(() => {
         if (errores.length > 0) {
@@ -233,7 +272,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     }, [errores])
     return (
-        <AuthContextAdmin.Provider value={{ sigin, user, isAuthenticated, errores, logout, siginIns, logoutIns, siginSuAdmin, logoutSuAdmin, registerEvent }}>
+        <AuthContextAdmin.Provider value={{ sigin, user, isAuthenticated, errores, logout, siginIns, logoutIns, siginSuAdmin, logoutSuAdmin, registerEvent, registerResults}}>
             {children}
         </AuthContextAdmin.Provider>
     );
