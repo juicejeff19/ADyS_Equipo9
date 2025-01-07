@@ -27,4 +27,20 @@ export const loginSuAdminRequest = (admin: { email: string; password: string }) 
 
 export const logoutSuAdminRequest = () => {
     return axios.post(`${API}superadmin/logout`, {}, { withCredentials: true });
-};
+}
+
+export const registerEventRequest = (eventData: {
+    name: string;
+    startDate: Date;
+    endDate: Date;
+    closingOfRegistrations: Date;
+    mode: string[];
+    cost: number;
+    requirements: string;
+    rules: string;
+    kilometers: number;
+    description?: string;
+  }) => {
+    return axios.post(`${API}admin/profile/registrarEvento`, eventData, { withCredentials: true });
+  }
+  

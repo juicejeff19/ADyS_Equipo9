@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode, useContext, useEffect } from "react";
-import { loginAdminRequest, loginInstrucRequest, loginSuAdminRequest, logoutAdminRequest, logoutInstrucRequest, logoutSuAdminRequest } from '../api/auth';
+import { loginAdminRequest, loginInstrucRequest, loginSuAdminRequest, logoutAdminRequest, logoutInstrucRequest, logoutSuAdminRequest, registerEventRequest } from '../api/auth';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,20 @@ interface User {
     email: string;
     password: string;
 }
+
+type FormEventValues = {
+    name: string;
+    startDate: Date;
+    endDate: Date;
+    closingOfRegistrations: Date;
+    mode: string[];
+    cost: number;
+    requirements: string;
+    rules: string;
+    kilometers: number;
+    description?: string;
+};
+
 
 interface AuthContextType {
     sigin: (user: User) => Promise<void>;
@@ -20,7 +34,7 @@ interface AuthContextType {
     logoutIns: () => Promise<void>;
     siginSuAdmin: (user: User) => Promise<void>;
     logoutSuAdmin: () => Promise<void>;
-
+    registerEvent: (data: FormEventValues) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -76,7 +90,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const logout = async () => {
         try {
-            await logoutAdminRequest(); 
+            await logoutAdminRequest();
             setUser(null);
             setIsAuthenticated(false);
             console.log('Logout exitoso');
@@ -116,7 +130,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const logoutIns = async () => {
         try {
-            await logoutInstrucRequest(); 
+            await logoutInstrucRequest();
             setUser(null);
             setIsAuthenticated(false);
             console.log('Logout exitoso');
@@ -157,7 +171,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const logoutSuAdmin = async () => {
         try {
-            await logoutSuAdminRequest(); 
+            await logoutSuAdminRequest();
             setUser(null);
             setIsAuthenticated(false);
             console.log('Logout exitoso');
@@ -166,6 +180,49 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             console.error('Error durante el logout:', error);
         }
     };
+
+
+    const registerEvent = async (data: FormEventValues): Promise<void> => {
+        const eventData = {
+            name: data.name,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            closingOfRegistrations: data.closingOfRegistrations,
+            mode: data.mode,
+            cost: data.cost,
+            requirements: data.requirements,
+            rules: data.rules,
+            kilometers: data.kilometers,
+            description: data.description,
+        };
+
+        try {
+            const res = await registerEventRequest(eventData); // Usando tu función para registrar el evento
+            console.log("Event registered successfully:", res.data);
+            // Aquí puedes manejar la respuesta como desees
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                if (Array.isArray(error.response.data)) {
+                    setErrores(error.response.data); // Aquí puedes gestionar los errores del backend
+                } else {
+                    console.error("El backend devolvió un formato inesperado:", error.response.data);
+                    setErrores(["Ocurrió un error inesperado"]);
+                }
+            } else {
+                console.error("Error no relacionado con Axios:", error);
+                setErrores(["Error inesperado"]);
+            }
+        }
+    };
+
+
+
+    ///--------------------
+    ///aqui abajo vas a escribir para el instructor
+    // vas a importar las funcones de la api del frontend, vas a crear tu
+    //propio auth.ts para el instructor (crea otro archivo de preferencia)
+    //y sigue el de ejmplo el que ya esta en la carrtepa api
+
 
     useEffect(() => {
         if (errores.length > 0) {
@@ -176,7 +233,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     }, [errores])
     return (
-        <AuthContextAdmin.Provider value={{ sigin, user, isAuthenticated, errores, logout, siginIns, logoutIns, siginSuAdmin, logoutSuAdmin }}>
+        <AuthContextAdmin.Provider value={{ sigin, user, isAuthenticated, errores, logout, siginIns, logoutIns, siginSuAdmin, logoutSuAdmin, registerEvent }}>
             {children}
         </AuthContextAdmin.Provider>
     );
