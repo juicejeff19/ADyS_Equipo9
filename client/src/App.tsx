@@ -13,6 +13,7 @@ import ProfileAdmin from './pages/admin/ProfileAdmin';
 import ProfileInstructor from './pages/instructor/ProfileInstructor';
 import { ProtectedRoute } from './ProtectedRoutes';
 import Logout from './libs/Logout';
+import FormIns from './components/Instructor/FormIns';
 
 // import { Placeholder } from 'react-bootstrap';
 
@@ -77,7 +78,7 @@ function App() {
   ]
 
   const profileInstrucorLinks = [
-    { name: 'Registro de Sesion', url: '/regustrarResultado' },
+    { name: 'Registro de Sesion', url: '/registrarResultado' },
     { name: 'Logout', url: '/logout' }
   ]
 
@@ -85,14 +86,27 @@ function App() {
     { name: 'Logout', url: '/logout' }
   ]
 
+  const registrarEventoLinks = [
+    { name: 'Regresar', url: '/profileAdmin' },
+    { name: 'Logout', url: '/logout' }
+  ]
+  
+  const registrarResultadoLinks = [
+    { name: 'Regresar', url: '/profileInstructor' },
+    { name: 'Logout', url: '/logout' }
+  ]
+
   const routeLinks: { [key: string]: Link[] } = {
     '/admin': adminLinks,
     '/superadmin': suAdminLinks,
     '/instructor': instructorLinks,
-    '/home': homeLinks,
+    '/': homeLinks,
     '/profileAdmin': profileAdminLinks,
     '/profileInstructor': profileInstrucorLinks,
     '/profileSuperAdmind': profileSuperAdminLinks,
+    '/registrarEvento': registrarEventoLinks,
+    '/generarReconocimiento': registrarEventoLinks,
+    '/registrarResultado': registrarResultadoLinks,
   }
   const links = routeLinks[location.pathname] || homeLinks;
 
@@ -108,12 +122,18 @@ function App() {
             <Route path='/admin' element={<Form inputs={loginInputs} boxHeight="560px" header='Bienvenido Administrador' />} />
             <Route element={<ProtectedRoute />}>
               <Route path='/profileSuperAdmind' element={<ProfileSuAdmin />} />
+              <Route path='/logout' element={<Logout />} />
             </Route>
             <Route element={<ProtectedRoute />}>
-              <Route path='/profileInstructor' element={<ProfileInstructor />} />
+              <Route path='/profileInstructor' element={<ProfileInstructor/>} />
+              <Route path='/registrarResultado' element={<FormIns />} />
+              <Route path='/logout' element={<Logout />} />
+              
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path='/profileAdmin' element={<ProfileAdmin />} />
+              <Route path='/registrarEvento' element={<h1>HOLAAA</h1>}></Route>
+              <Route path='/generarReconocimiento' element={<h1>RECONOCIMIEENTOOOOO</h1>}></Route>
               <Route path='/eventos' element={<h1>Eventos</h1>} />
               <Route path='/add-evento' element={<h1>ADD Evento</h1>} />
               <Route path='/evento/:id' element={<h1>Añadir </h1>} />
