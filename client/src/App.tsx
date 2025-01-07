@@ -14,6 +14,7 @@ import ProfileInstructor from './pages/instructor/ProfileInstructor';
 import { ProtectedRoute } from './ProtectedRoutes';
 import Logout from './libs/Logout';
 import FormIns from './components/Instructor/FormIns';
+import FormEvent from './components/Admin/FormEvent';
 
 // import { Placeholder } from 'react-bootstrap';
 
@@ -107,6 +108,7 @@ function App() {
     '/registrarEvento': registrarEventoLinks,
     '/generarReconocimiento': registrarEventoLinks,
     '/registrarResultado': registrarResultadoLinks,
+    '/registroExitoso': registrarEventoLinks,
   }
   const links = routeLinks[location.pathname] || homeLinks;
 
@@ -132,8 +134,9 @@ function App() {
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path='/profileAdmin' element={<ProfileAdmin />} />
-              <Route path='/registrarEvento' element={<h1>HOLAAA</h1>}></Route>
+              <Route path='/registrarEvento' element={<FormEvent />}></Route>
               <Route path='/generarReconocimiento' element={<h1>RECONOCIMIEENTOOOOO</h1>}></Route>
+              <Route path= '/registroExitoso' element={<h1>REGISTRO EXITOSO!!!</h1>}></Route>
               <Route path='/eventos' element={<h1>Eventos</h1>} />
               <Route path='/add-evento' element={<h1>ADD Evento</h1>} />
               <Route path='/evento/:id' element={<h1>Añadir </h1>} />
