@@ -27,7 +27,7 @@ const FormIns: React.FC = () => {
 
   return (
     <div className="login-container">
-      <div className="login-box" style={{ height: "560px" }}>
+      <div className="login-box" style={{ maxHeight: "560px", overflowY: "auto" }}>
         <h1 style={{ color: "#5c7ece" }}>Registrar Usuario</h1>
 
         <form onSubmit={onSubmit}>
