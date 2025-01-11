@@ -69,6 +69,19 @@ const CompletedEvents: React.FC = () => {
                     <p>
                         <strong>Descripción:</strong> {event.description}
                     </p>
+                    <button
+            onClick={() => (window.location.href = "/Participantes")}
+            style={{
+              backgroundColor: "#007BFF",
+              color: "#FFF",
+              border: "none",
+              padding: "10px 20px",
+              cursor: "pointer",
+              borderRadius: "5px",
+            }}
+          >
+            Ver participantes inscritos
+          </button>
                 </div>
             ))}
         </div>

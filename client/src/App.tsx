@@ -17,6 +17,7 @@ import FormIns from './components/Instructor/FormIns';
 import FormEvent from './components/Admin/FormEvent';
 import EventsList from './components/cuerpo/EventsList';
 import CompletedEvents from './components/cuerpo/CompletedEvents';
+import Participantes from './components/cuerpo/Participantes';
 
 // import { Placeholder } from 'react-bootstrap';
 
@@ -113,6 +114,7 @@ function App() {
     '/registroExitoso': registrarEventoLinks,
     '/eventsList': registrarEventoLinks,
     '/completedEvents': registrarEventoLinks,
+    '/participantes': registrarEventoLinks,
   }
   const links = routeLinks[location.pathname] || homeLinks;
 
@@ -125,6 +127,7 @@ function App() {
             <Route path='/' element={<Cuerpo />} />
             <Route path='/eventsList' element={<EventsList />}/>
             <Route path='/completedEvents' element={<CompletedEvents />}/>
+            <Route path='/participantes' element={<Participantes />}/>
             <Route path='/instructor' element={<Form inputs={loginInputs} boxHeight="560px" header='Bienvenido Instructor' />} />
             <Route path='/superadmin' element={<Form inputs={loginInputs} boxHeight="560px" header='Bienvenido SuperAdmind' />} />
             <Route path='/admin' element={<Form inputs={loginInputs} boxHeight="560px" header='Bienvenido Administrador' />} />

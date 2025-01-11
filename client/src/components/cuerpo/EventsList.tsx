@@ -45,13 +45,19 @@ const EventsList: React.FC = () => {
     <div>
       <h1>Eventos Destacados</h1>
       {events.map((event) => (
-        <div key={event._id} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}>
+        <div
+          key={event._id}
+          style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}
+        >
           <h2>{event.name}</h2>
           <p>
-            <strong>Fecha:</strong> {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
+            <strong>Fecha:</strong>{" "}
+            {new Date(event.startDate).toLocaleDateString()} -{" "}
+            {new Date(event.endDate).toLocaleDateString()}
           </p>
           <p>
-            <strong>Cierre de inscripciones:</strong> {new Date(event.closingOfRegistrations).toLocaleDateString()}
+            <strong>Cierre de inscripciones:</strong>{" "}
+            {new Date(event.closingOfRegistrations).toLocaleDateString()}
           </p>
           <p>
             <strong>Costo:</strong> ${event.cost}
@@ -68,6 +74,19 @@ const EventsList: React.FC = () => {
           <p>
             <strong>Descripción:</strong> {event.description}
           </p>
+          <button
+            onClick={() => (window.location.href = "/Participantes")}
+            style={{
+              backgroundColor: "#007BFF",
+              color: "#FFF",
+              border: "none",
+              padding: "10px 20px",
+              cursor: "pointer",
+              borderRadius: "5px",
+            }}
+          >
+            Ver participantes inscritos
+          </button>
         </div>
       ))}
     </div>
