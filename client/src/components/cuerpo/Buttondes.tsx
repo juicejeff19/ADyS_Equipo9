@@ -1,18 +1,28 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import React from "react";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const Buttondes: React.FC = () => {
-    return (
-        <div>
-            <DropdownButton id="dropdown-basic-button" title="Información importante">
-                <Dropdown.Item href="#/action-1">Proximos Eventos</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Eventos Concluidos</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Atletas Destacados</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Coaches</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Contacto</Dropdown.Item>
-            </DropdownButton>
-        </div>
-    )
-}
+const MyDropdown: React.FC = () => {
+  return (
+    <DropdownButton id="dropdown-basic-button" title="Información importante">
+      {/* Especificamos 'as={Link}' para usar el componente Link y pasamos 'to' como ruta */}
+      <Dropdown.Item as={Link} to="/eventsList">
+        Próximos Eventos
+      </Dropdown.Item>
+      <Dropdown.Item as={Link} to="/completedEvents">
+        Eventos Concluidos
+      </Dropdown.Item>
+      <Dropdown.Item as={Link} to="/featuredAthletes">
+        Atletas Destacados
+      </Dropdown.Item>
+      <Dropdown.Item as={Link} to="/coaches">
+        Coaches
+      </Dropdown.Item>
+      <Dropdown.Item as={Link} to="/contact">
+        Contacto
+      </Dropdown.Item>
+    </DropdownButton>
+  );
+};
 
-export default Buttondes;
+export default MyDropdown;

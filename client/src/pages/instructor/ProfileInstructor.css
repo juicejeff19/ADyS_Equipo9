@@ -1,0 +1,17 @@
+.profile-instructor-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .card-row {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente fila si no caben */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    gap: 20px; /* Espaciado entre tarjetas */
+  }
+  
+  /* h1 {
+    margin-bottom: 20px;
+    color: #4a4aef;
+  }
+   */

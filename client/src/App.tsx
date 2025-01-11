@@ -15,6 +15,8 @@ import { ProtectedRoute } from './ProtectedRoutes';
 import Logout from './libs/Logout';
 import FormIns from './components/Instructor/FormIns';
 import FormEvent from './components/Admin/FormEvent';
+import EventsList from './components/cuerpo/EventsList';
+import CompletedEvents from './components/cuerpo/CompletedEvents';
 
 // import { Placeholder } from 'react-bootstrap';
 
@@ -109,6 +111,8 @@ function App() {
     '/generarReconocimiento': registrarEventoLinks,
     '/registrarResultado': registrarResultadoLinks,
     '/registroExitoso': registrarEventoLinks,
+    '/eventsList': registrarEventoLinks,
+    '/completedEvents': registrarEventoLinks,
   }
   const links = routeLinks[location.pathname] || homeLinks;
 
@@ -119,6 +123,8 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path='/' element={<Cuerpo />} />
+            <Route path='/eventsList' element={<EventsList />}/>
+            <Route path='/completedEvents' element={<CompletedEvents />}/>
             <Route path='/instructor' element={<Form inputs={loginInputs} boxHeight="560px" header='Bienvenido Instructor' />} />
             <Route path='/superadmin' element={<Form inputs={loginInputs} boxHeight="560px" header='Bienvenido SuperAdmind' />} />
             <Route path='/admin' element={<Form inputs={loginInputs} boxHeight="560px" header='Bienvenido Administrador' />} />

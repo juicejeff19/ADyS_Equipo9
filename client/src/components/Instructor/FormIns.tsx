@@ -28,7 +28,7 @@ const FormIns: React.FC = () => {
   return (
     <div className="login-container">
       <div className="login-box" style={{ maxHeight: "560px", overflowY: "auto" }}>
-        <h1 style={{ color: "#5c7ece" }}>Registrar Usuario</h1>
+        <h1 style={{ color: "#5c7ece" }}>Registrar Resultado</h1>
 
         <form onSubmit={onSubmit}>
           {/* Campo de nombre */}
@@ -38,7 +38,7 @@ const FormIns: React.FC = () => {
               <input
                 id="name"
                 type="name"
-                placeholder="Ejemplo: usuario@dominio.com"
+                placeholder="Tu nombre por favor"
                 {...register("name", {
                   required: {
                     value: true,
