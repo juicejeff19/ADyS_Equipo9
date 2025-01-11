@@ -1,6 +1,6 @@
 import React, { createContext, useState, ReactNode, useContext, useEffect } from "react";
-import { loginAdminRequest, loginInstrucRequest, loginSuAdminRequest, logoutAdminRequest, logoutInstrucRequest, logoutSuAdminRequest, registerEventRequest, registerResultsRequest } from '../api/auth';
-import axios, { AxiosError } from 'axios';
+import { loginAdminRequest, loginInstrucRequest, loginSuAdminRequest, logoutAdminRequest, logoutInstrucRequest, logoutSuAdminRequest, registerEventRequest, registerResultsRequest, fetchUserByIdRequest } from '../api/auth';
+import axios, { AxiosResponse } from 'axios';
 import { useNavigate } from "react-router-dom";
 
 
@@ -47,6 +47,7 @@ interface AuthContextType {
     logoutSuAdmin: () => Promise<void>;
     registerEvent: (data: FormEventValues) => Promise<void>;
     registerResults: (data: FormInsValues) => Promise<void>;
+    getUserById: (id: string) => Promise<AxiosResponse<Blob>>;
 }
 
 interface AuthProviderProps {
@@ -263,6 +264,30 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     };
 
+
+
+    const getUserById = async (id: string): Promise<AxiosResponse<Blob>> => {
+        try {
+          const res = await fetchUserByIdRequest(id); // Llama a la API
+          return res; // Devuelve la respuesta completa
+        } catch (error) {
+          if (axios.isAxiosError(error) && error.response) {
+            if (Array.isArray(error.response.data)) {
+              setErrores(error.response.data); // Manejo de errores en formato de array
+            } else {
+              console.error("El backend devolvió un formato inesperado:", error.response.data);
+              setErrores(["Ocurrió un error inesperado"]);
+            }
+          } else {
+            console.error("Error no relacionado con Axios:", error);
+            setErrores(["Error inesperado"]);
+          }
+          throw error; // Lanza el error para manejarlo en el lugar donde se llama a la función
+        }
+      };
+      
+    
+
     useEffect(() => {
         if (errores.length > 0) {
             const timer = setTimeout(() => {
@@ -272,7 +297,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     }, [errores])
     return (
-        <AuthContextAdmin.Provider value={{ sigin, user, isAuthenticated, errores, logout, siginIns, logoutIns, siginSuAdmin, logoutSuAdmin, registerEvent, registerResults}}>
+        <AuthContextAdmin.Provider value={{ sigin, user, isAuthenticated, errores, logout, siginIns, logoutIns, siginSuAdmin, logoutSuAdmin, registerEvent, registerResults, getUserById}}>
             {children}
         </AuthContextAdmin.Provider>
     );

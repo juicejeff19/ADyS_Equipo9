@@ -56,4 +56,8 @@ export const registerEventRequest = (eventData: {
   }) => {
     return axios.post(`${API}instructor/profile/registerResults`, eventData, { withCredentials: true });
   }
+
+  export const fetchUserByIdRequest = (id: string) => {
+    return axios.get(`${API}admin/profile/${id}`, { withCredentials: true, responseType: 'blob' });
+  };
   

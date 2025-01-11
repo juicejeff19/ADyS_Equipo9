@@ -18,6 +18,7 @@ import FormEvent from './components/Admin/FormEvent';
 import EventsList from './components/cuerpo/EventsList';
 import CompletedEvents from './components/cuerpo/CompletedEvents';
 import Participantes from './components/cuerpo/Participantes';
+import ReconocimientoID from './pages/admin/ReconocimientoId';
 
 // import { Placeholder } from 'react-bootstrap';
 
@@ -144,7 +145,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path='/profileAdmin' element={<ProfileAdmin />} />
               <Route path='/registrarEvento' element={<FormEvent />}></Route>
-              <Route path='/generarReconocimiento' element={<h1>RECONOCIMIEENTOOOOO</h1>}></Route>
+              <Route path='/generarReconocimiento' element={<ReconocimientoID />}></Route>
               <Route path= '/registroExitoso' element={<h1>REGISTRO EXITOSO!!!</h1>}></Route>
               <Route path='/eventos' element={<h1>Eventos</h1>} />
               <Route path='/add-evento' element={<h1>ADD Evento</h1>} />
