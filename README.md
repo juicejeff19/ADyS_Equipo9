@@ -1,4 +1,4 @@
-# ADyS
+# AyDS
 
 Este repositorio contiene el desarrollo del proyecto para la UDA "Análisis y Diseño de Sistemas" (ADyS). El proyecto sigue una metodología estructurada para asegurar una progresión clara y controlada desde la fase de análisis hasta la implementación de artefactos finales.
 
