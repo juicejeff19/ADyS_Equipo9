@@ -13,12 +13,6 @@ El proyecto ADyS se centra en la creación de una solución (especificar breveme
 - **Desarrollo e Implementación**: Codificar y probar los componentes diseñados, cumpliendo con los estándares de calidad.
 - **Documentación y Artefactos**: Generar artefactos que acompañen cada fase para mejorar la claridad y facilitar futuras actualizaciones.
 
-## Estructura del Repositorio
-
-- `docs/`: Documentación de todas las fases del proyecto, incluyendo el análisis de requerimientos, diseño de arquitectura, y otros artefactos.
-- `src/`: Código fuente de la implementación.
-- `tests/`: Casos de prueba y archivos de configuración para las pruebas de cada módulo.
-- `artefacts/`: Carpeta que contendrá los artefactos generados en cada fase, como diagramas, documentos de especificación, y prototipos.
 
 ## Roadmap
 
